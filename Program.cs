@@ -45,8 +45,8 @@ internal class Program
         Shape circle = new Circle(5);
         Shape rectangle = new Rectangle(4, 3);
 
-        Console.WriteLine($"Area of Circle: {circle.GetArea():F2}");
-        Console.WriteLine($"Area of Rectangle: {rectangle.GetArea()}");
+        Console.WriteLine($"Area of circle: {circle.GetArea():F2}");
+        Console.WriteLine($"Area of rectangle: {rectangle.GetArea()}");
         Console.ReadKey();
 
     }
