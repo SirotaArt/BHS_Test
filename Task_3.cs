@@ -9,34 +9,34 @@ public class BankAccount
         balance = setBalance;
     }
 
-    public void Deposit(decimal CashIn)
+    public void CashIn(decimal cashIn)
     {
-        if (CashIn <= 0)
+        if (cashIn <= 0)
         {
             Console.WriteLine("Сумма для пополнения должна быть больше 0.");
             return;
         }
 
-        balance += CashIn;
-        Console.WriteLine($"Внесено: {CashIn:C}. Текущий баланс: {balance:C}.");
+        balance += cashIn;
+        Console.WriteLine($"Внесено: {cashIn:C}. Текущий баланс: {balance:C}.");
     }
 
-    public void Withdraw(decimal CashOut)
+    public void CashOut(decimal cashOut)
     {
-        if (CashOut <= 0)
+        if (cashOut <= 0)
         {
             Console.WriteLine("Сумма для снятия должна быть больше 0.");
             return;
         }
 
-        if (CashOut > balance)
+        if (cashOut > balance)
         {
             Console.WriteLine("Недостаточно средств на счете.");
             return;
         }
 
-        balance -= CashOut;
-        Console.WriteLine($"Снято: {CashOut:C}. Текущий баланс: {balance:C}.");
+        balance -= cashOut;
+        Console.WriteLine($"Снято: {cashOut:C}. Текущий баланс: {balance:C}.");
     }
 
     public decimal GetBalance()
@@ -53,8 +53,8 @@ class Program
         BankAccount account = new BankAccount(0m);
 
         account.Deposit(999m); 
-        account.Withdraw(739m); 
-        account.Withdraw(1234m); 
+        account.CashOut(739m); 
+        account.CashOut(1234m); 
 
         Console.WriteLine($"Текущий баланс: {account.GetBalance():C}");
         Console.ReadKey();
