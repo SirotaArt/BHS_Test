@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LODManagerScript : MonoBehaviour
+{
+    public GameObject lowPolyModel;
+    public GameObject mediumPolyModel;
+    public GameObject highPolyModel;
+
+    public Transform player; // Ссылка на игрока
+    [SerializeField] private float mediumDistance = 15f; // Расстояние для переключения на среднюю модель
+    [SerializeField] private float lowDistance = 30f; // Расстояние для переключения на низкую модель
+
+    private bool isBehindPlayer = false;
+
+    void Start()
+    {
+        UpdateLOD();
+    }
+
+    void Update()
+    {
+        UpdateLOD();
+    }
+
+    void UpdateLOD()
+    {
+        float distance = Vector3.Distance(player.position, transform.position);
+        Vector3 toPlayer = transform.position - player.position;
+        isBehindPlayer = Vector3.Dot(player.forward, toPlayer) < 0;
+
+        // Включение/выключение моделей в зависимости от расстояния
+        if (distance < mediumDistance && !isBehindPlayer)
+        {
+            SetActiveModel(highPolyModel);
+        }
+        else if (distance < lowDistance && !isBehindPlayer)
+        {
+            SetActiveModel(mediumPolyModel);
+        }
+        else
+        {
+            SetActiveModel(lowPolyModel);
+        }
+
+    }
+
+    void SetActiveModel(GameObject activeModel)
+    {
+        highPolyModel.SetActive(activeModel == highPolyModel);
+        mediumPolyModel.SetActive(activeModel == mediumPolyModel);
+        lowPolyModel.SetActive(activeModel == lowPolyModel);
+
+        if (isBehindPlayer)
+        {
+            highPolyModel.SetActive(false);
+            mediumPolyModel.SetActive(false);
+            lowPolyModel.SetActive(true);
+
+            this.gameObject.isStatic = true;
+        }
+    }
+}
