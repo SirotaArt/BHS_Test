@@ -39,7 +39,7 @@ public class BankAccount
         Console.WriteLine($"Снято: {cashOut:C}. Текущий баланс: {balance:C}.");
     }
 
-    public decimal GetBalance()
+    public decimal ShowBalance()
     {
         return balance;
     }
@@ -56,7 +56,7 @@ class Program
         account.CashOut(739m); 
         account.CashOut(1234m); 
 
-        Console.WriteLine($"Текущий баланс: {account.GetBalance():C}");
+        Console.WriteLine($"Текущий баланс: {account.ShowBalance():C}");
         Console.ReadKey();
     }
 }
